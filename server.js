@@ -12,11 +12,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 
-// Serve index.html
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')))
-
-	// Serve notes
-   .get('/notes', (req, res) => res.sendFile(path.join(__dirname, 'public', 'notes.html')))
+// Serve notes.html
+app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, 'public', 'notes.html')))
 
 	// Get the notes from the database JSON file, and return them.
    .get('/api/notes', (req, res) => {
@@ -40,8 +37,28 @@ app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.ht
 		   console.log('GET /api/notes/' + req.params.id);
 
 		   // Read the file and return a JSON string to the user.
-		   res.json(JSON.parse(data)[req.params.id]);
+		   res.json(JSON.parse(data).find(note => note.id === req.params.id));
 	   });
+   })
+	// Default to serving index.html
+   .get('*', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')))
+
+	// Handle note deletions.
+   .delete('/api/notes/:id', (req, res) => {
+	   fs.readFile('./db/db.json')
+	     .then(data => {
+		     console.log('DELETE /api/notes/' + req.params.id);
+
+		     // Parse the notes, and remove the selected item from the resulting array.
+		     const notes = JSON.parse(data)
+		                       .filter(note => note.id !== req.params.id);
+
+		     // Convert the array back into a string and save it to the database file.
+		     fs.writeFile('./db/db.json', JSON.stringify(notes))
+		       .then(() => res.sendStatus(200))
+		       .catch(err => console.log(err));
+	     })
+	     .catch(err => console.log(err));
    })
 
 	// Handle incoming POST data
@@ -54,8 +71,10 @@ app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.ht
 		     const notes   = JSON.parse(data);
 		     const newNote = req.body;
 
-		     // Add the new note to the notes.
+
+		     // Add the new note to the notes, then reindex the notes to tidy up.
 		     notes.push(newNote);
+		     notes.forEach((note, index) => note.id = index);
 
 		     // Update the database JSON file, and return the JSON object to the user.
 		     fs.writeFile('./db/db.json', JSON.stringify(notes))
