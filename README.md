@@ -1,6 +1,8 @@
-# Note Taker Starter Code
+# Note Taker
 
 ## Description
+
+This is an application to take notes.
 
 ## Installation
 
@@ -8,7 +10,13 @@
 
 ### Execution
 
+```shell
+npm start
+```
+
 ### Demonstration
+
+A video demonstration for this can be found here: 
 
 ### Future Plans
 
