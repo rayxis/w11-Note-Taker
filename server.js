@@ -20,13 +20,7 @@ app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, 'public', 'not
 	   console.log('GET /api/notes');
 
 	   // Read the file and return a JSON string to the user.
-	   fs.readFile('./db/db.json').then(data => {
-		   const notes = JSON.parse(data);
-
-		   // Add an ID to the returned object.
-		   notes.forEach((note, index) => note.id = index);
-		   res.json(notes);
-	   });
+	   fs.readFile('./db/db.json', 'utf8').then(data => res.json(JSON.parse(data)));
    })
 
 	// Get a specific note based off of the ID.
@@ -50,8 +44,7 @@ app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, 'public', 'not
 		     console.log('DELETE /api/notes/' + req.params.id);
 
 		     // Parse the notes, and remove the selected item from the resulting array.
-		     const notes = JSON.parse(data)
-		                       .filter(note => note.id !== req.params.id);
+		     let notes = JSON.parse(data).filter(note => +note.id !== +req.params.id);
 
 		     // Convert the array back into a string and save it to the database file.
 		     fs.writeFile('./db/db.json', JSON.stringify(notes))
