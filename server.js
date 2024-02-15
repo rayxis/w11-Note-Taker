@@ -67,7 +67,7 @@ app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, 'public', 'not
 
 		     // Add the new note to the notes, then reindex the notes to tidy up.
 		     notes.push(newNote);
-		     notes.forEach((note, index) => note.id = index);
+		     notes.forEach((note, index) => note.id = index + 1);
 
 		     // Update the database JSON file, and return the JSON object to the user.
 		     fs.writeFile('./db/db.json', JSON.stringify(notes))
