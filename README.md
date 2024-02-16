@@ -2,12 +2,18 @@
 
 ## Description
 
-This is an application to take notes.
+This is an application to take notes, and is designed for those who need a space to organize their thoughts and keep
+track of tasks. Opening the application reveals a landing page with a link to a notes page, providing a structured
+layout for easy retrieval and organization of notes.
 
 ## Installation
 
-Prior to installation., you'll want to make sure that you have Node.js installed and properly configured. To install 
-this application, export project to the directory of choice. 
+Installation is very simple. Prior to installation, you'll want to make sure that you have Node.js installed and
+properly configured. Additionally, you'll want to make sure that if you are using SELinux that you have the correct
+settings enabled. These are things beyond the scope of this README, but there are plenty of resources that you'll be
+able to find by googling it on Bing or Yahoo.
+
+To install this application, export project to the directory of choice.
 
 ## Usage
 
@@ -18,6 +24,12 @@ To run the app, type the following command from within the root folder for the a
 ```shell
 npm start
 ```
+
+From a visitor's perspective, type your notes and title into the provided spaces along the right-hand side. Once
+you're done entering the details of your note, click on the save button (or clear button) at the top of the screen.
+The list on the left-hand side will populate as you continue to enter your notes.
+
+If you find it necessary, you're also able to delete notes by clicking on the red trashcan icon in the note list.
 
 ### Demonstration
 
