@@ -6,9 +6,14 @@ This is an application to take notes.
 
 ## Installation
 
+Prior to installation., you'll want to make sure that you have Node.js installed and properly configured. To install 
+this application, export project to the directory of choice. 
+
 ## Usage
 
 ### Execution
+
+To run the app, type the following command from within the root folder for the app, on the command line
 
 ```shell
 npm start
@@ -16,9 +21,14 @@ npm start
 
 ### Demonstration
 
-A video demonstration for this can be found here: 
+A live version of this application can be accessed here: https://w11-notetaker-6a8b9d74f74a.herokuapp.com/
 
-### Future Plans
+### Screenshots
+
+![Welcome screen](./screenshots/Screenshot%202024-02-15%20at%209.53.16%E2%80%AFPM.png)
+![No notes](./screenshots/Screenshot%202024-02-15%20at%209.53.54%E2%80%AFPM.png)
+![Notes](./screenshots/Screenshot%202024-02-15%20at%209.55.09%E2%80%AFPM.png)
+![Deleted note](./screenshots/Screenshot%202024-02-15%20at%209.55.58%E2%80%AFPM.png)
 
 ## User Story
 
